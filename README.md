@@ -16,3 +16,9 @@ NodeJS framework(Adonis) and React
 
 # Title: Suck It
 
+A e-commerce website to allow user to come in and purchase bubble tea. Every drink can be selected and customise according to the user specifications. 
+
+for this assignment:
+* MySql will be use as the database.
+* Adonis will be used to create the API to link the database.
+* React will be used to create the frontend experience
