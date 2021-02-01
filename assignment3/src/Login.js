@@ -12,7 +12,6 @@ export default class Create extends React.Component{
         address:""
     }
 
-  
 
     render(){
         return(
@@ -67,6 +66,12 @@ export default class Create extends React.Component{
             password:this.state.password,
             email:this.state.email,
             address:this.state.address
+        })
+        this.setState({
+        username: "",
+        password: "",
+        email: "",
+        address:""
         })
     }
 
