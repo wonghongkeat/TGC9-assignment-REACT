@@ -14,20 +14,13 @@ export default class Topping extends React.Component {
 
     async componentDidMount() {
         let responseTopping = await axios.get(`${base_url}`+"reactTopping")
-        this.setState({
-            toppings: responseTopping.data
-        })
-
         let responseFlavour = await axios.get(`${base_url}`+"reactFlavours")
-        this.setState({
-            flavours: responseFlavour.data
-        })
-
         let responseSugar = await axios.get(`${base_url}`+"reactSugar")
         this.setState({
+            toppings: responseTopping.data,
+            flavours: responseFlavour.data,
             sugars: responseSugar.data
         })
-        console.log(responseSugar)
     }
 
 
