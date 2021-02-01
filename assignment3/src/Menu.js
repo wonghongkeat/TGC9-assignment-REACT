@@ -8,14 +8,14 @@ export default class Topping extends React.Component {
         toppings: [],
         flavours: [],
         sugars: []
- 
-        
-}
+
+
+    }
 
     async componentDidMount() {
-        let responseTopping = await axios.get(`${base_url}`+"reactTopping")
-        let responseFlavour = await axios.get(`${base_url}`+"reactFlavours")
-        let responseSugar = await axios.get(`${base_url}`+"reactSugar")
+        let responseTopping = await axios.get(`${base_url}reactTopping`)
+        let responseFlavour = await axios.get(`${base_url}reactFlavours`)
+        let responseSugar = await axios.get(`${base_url}reactSugar`)
         this.setState({
             toppings: responseTopping.data,
             flavours: responseFlavour.data,
@@ -27,6 +27,7 @@ export default class Topping extends React.Component {
     render() {
         return (
             <React.Fragment>
+
                 <h1>toppings available:</h1>
                 {this.state.toppings.map(t => (
                     <div>
@@ -41,12 +42,13 @@ export default class Topping extends React.Component {
                     </div>
                 ))}
 
-                 <h1>Sugar level</h1>
+                <h1>Sugar level</h1>
                 {this.state.sugars.map(s => (
                     <div>
                         <p>{s.level}%</p>
                     </div>
                 ))}
+
             </React.Fragment>
         )
     }

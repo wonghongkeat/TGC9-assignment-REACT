@@ -16,7 +16,7 @@ function App() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ml-auto" >
-                        
+
                         <li className="nav-item active">
                             <Link to="/Frontpage">home</Link>
                         </li>
@@ -24,8 +24,8 @@ function App() {
                             <Link to="/menu">menu</Link>
                         </li>
                         <li className="nav-item">
-                         <Link to ="/login">create</Link>
-                            </li>
+                            <Link to="/login">create</Link>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -34,8 +34,8 @@ function App() {
                     <Menu />
                 </Route>
                 <Route exact path="/login">
-                    <Login/>
-                    </Route>
+                    <Login />
+                </Route>
                 <Route exact path="/Frontpage">
                     <Frontpage />
                 </Route>
