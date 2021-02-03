@@ -1,7 +1,8 @@
 import React from 'react'
 import Menu from "./Menu"
 import Login from "./Login"
-import Frontpage from "./Frontpage.js"
+import Frontpage from "./Frontpage"
+import CreateProduct from "./createProduct"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './frontPage.css'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
@@ -24,7 +25,10 @@ function App() {
                             <Link to="/menu">menu</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/login">create</Link>
+                            <Link to="/login">createUser</Link>
+                        </li>
+                           <li className="nav-item">
+                            <Link to="/createProduct">createProduct</Link>
                         </li>
                     </ul>
                 </div>
@@ -38,6 +42,9 @@ function App() {
                 </Route>
                 <Route exact path="/Frontpage">
                     <Frontpage />
+                </Route>
+                <Route exact path='/createProduct'>
+                    <CreateProduct/>
                 </Route>
             </Switch>
         </Router>
