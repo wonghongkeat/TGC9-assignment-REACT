@@ -3,6 +3,7 @@ import Menu from "./Menu"
 import Login from "./Login"
 import Frontpage from "./Frontpage"
 import CreateProduct from "./createProduct"
+import User from "./user"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './frontPage.css'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
@@ -30,6 +31,10 @@ function App() {
                            <li className="nav-item">
                             <Link to="/createProduct">createProduct</Link>
                         </li>
+                      
+                           <li className="nav-item">
+                            <Link to="/user">User Login</Link>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -45,6 +50,9 @@ function App() {
                 </Route>
                 <Route exact path='/createProduct'>
                     <CreateProduct/>
+                </Route>
+                <Route exact path='/user'>
+                    <User/>
                 </Route>
             </Switch>
         </Router>
