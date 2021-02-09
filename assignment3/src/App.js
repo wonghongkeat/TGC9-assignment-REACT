@@ -3,6 +3,7 @@ import Menu from "./Menu"
 import Login from "./Login"
 import Frontpage from "./Frontpage"
 import CreateProduct from "./createProduct"
+import AddToCart from "./addToCart"
 import User from "./user"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './frontPage.css'
@@ -35,6 +36,9 @@ function App() {
                            <li className="nav-item">
                             <Link to="/user">User Login</Link>
                         </li>
+                         <li className="nav-item">
+                            <Link to="/AddToCart">Add To Cart</Link>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -53,6 +57,9 @@ function App() {
                 </Route>
                 <Route exact path='/user'>
                     <User/>
+                </Route>
+                  <Route exact path='/AddToCart'>
+                    <AddToCart/>
                 </Route>
             </Switch>
         </Router>

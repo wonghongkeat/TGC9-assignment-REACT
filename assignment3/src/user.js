@@ -7,6 +7,7 @@ export default class User extends React.Component {
     state={
         username:"",
         password:"",
+        token: ""
 
 
     }
@@ -37,6 +38,11 @@ export default class User extends React.Component {
             <div>
                 <button onClick={this.login}>Login</button>
             </div>
+
+             <div>
+                    <button onClick={this.getProfile}>Get User Profile</button>
+                </div>
+
         </React.Fragment>
         )
     }
@@ -45,6 +51,15 @@ export default class User extends React.Component {
         this.setState({
             [event.target.name]:event.target.value 
         })
+    }
+
+    getProfile = async () => {
+        let response = await axios.get(`${base_url}api/user/profile`, {
+            headers: {
+                Authorization: `Bearer ${this.state.token}`
+            }
+        })
+        console.log(response.data)
     }
 
     login = async ()=> {

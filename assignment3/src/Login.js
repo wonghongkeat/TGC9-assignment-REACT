@@ -9,7 +9,8 @@ export default class Create extends React.Component {
         username: "",
         password: "",
         email: "",
-        address: ""
+        address: "",
+        token: ""
     }
 
 
@@ -49,7 +50,14 @@ export default class Create extends React.Component {
                 />
 
                 <button onClick={this.register}>Create</button>
+
+                <div>
+                    <button onClick={this.getProfile}>Get User Profile</button>
+                </div>
+
             </div>
+
+
         )
     }
 
@@ -58,6 +66,15 @@ export default class Create extends React.Component {
         this.setState({
             [event.target.name]: event.target.value
         })
+    }
+
+    getProfile = async () => {
+        let response = await axios.get(`${base_url}api/user/profile`, {
+            headers: {
+                Authorization: `Bearer ${this.state.token}`
+            }
+        })
+        console.log(response.data)
     }
 
     register = async () => {
