@@ -70,7 +70,7 @@ export default class AddToCart extends React.Component {
                                 type="checkbox"
                                 value={t.id}
                                 name="topping"
-                                checked={this.state.product.topping == t.id}
+                                checked={this.state.product.topping.includes(t.id.toString())}
                                 onChange={this.updateToppingField}
                             />
                             <label>{t.topping}</label>
