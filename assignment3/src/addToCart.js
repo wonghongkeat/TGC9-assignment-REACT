@@ -41,7 +41,7 @@ export default class AddToCart extends React.Component {
                                 value={f.id}
                                 name="flavour"
                                 checked={this.state.product.flavour == f.id}
-                                onClick={this.updateFlavourField}
+                                onChange={this.updateFlavourField}
                             />
                             <label>{f.tea}</label>
                         </React.Fragment>
@@ -56,7 +56,7 @@ export default class AddToCart extends React.Component {
                                 value={s.id}
                                 name="sugar"
                                 checked={this.state.product.sugar == s.id}
-                                onClick={this.updateSugarField}
+                                onChange={this.updateSugarField}
                             />
                             <label>{s.level}</label>
                         </React.Fragment>
@@ -70,6 +70,7 @@ export default class AddToCart extends React.Component {
                                 type="checkbox"
                                 value={t.id}
                                 name="topping"
+                                checked={this.state.product.topping == t.id}
                                 onChange={this.updateToppingField}
                             />
                             <label>{t.topping}</label>
@@ -89,7 +90,8 @@ export default class AddToCart extends React.Component {
              product: {
                 ...this.state.product,
                 flavour: "",
-                sugar: ""
+                sugar: "",
+                topping:[]
             }
         })
     }
