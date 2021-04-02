@@ -98,7 +98,7 @@ export default class User extends React.Component {
             }
         })
         console.log(response.data)
-
+       
     }
 
     sendCart = async () => {
@@ -109,15 +109,14 @@ export default class User extends React.Component {
             }
         };
         console.log(option);
-        let response = await axios.put(
-            base_url + "cart",
-            { cart_content: cartContent },
+        let response = await axios.put(`${base_url}api/cart`,{ 
+            cart_content: cartContent },
             option
         );
         console.log(response);
     };
     getCart = async () => {
-        let response = await axios.get(base_url + "cart", {
+        let response = await axios.get( `${base_url}api/cart`, {
             headers: {
                 Authorization: "Bearer " + this.state.token
             }
