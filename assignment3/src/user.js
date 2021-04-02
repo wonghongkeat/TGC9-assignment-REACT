@@ -53,20 +53,27 @@ export default class User extends React.Component {
         })
     }
 
+        login = async ()=> {
+        let response = await axios.post(`${base_url}api/user/login`,{
+            username: this.state.username,
+            password: this.state.password
+        })
+         console.log(response.data);
+        this.setState({
+      token: response.data.token
+    });
+    }
+
     getProfile = async () => {
+        
         let response = await axios.get(`${base_url}api/user/profile`, {
             headers: {
                 Authorization: `Bearer ${this.state.token}`
             }
         })
         console.log(response.data)
+     
     }
 
-    login = async ()=> {
-        let response = await axios.post(`${base_url}api/user/login`,{
-            username: this.state.username,
-            password: this.state.password
-        })
-         console.log(response.data);
-    }
+
 }

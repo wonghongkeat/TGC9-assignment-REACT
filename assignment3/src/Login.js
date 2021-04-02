@@ -51,9 +51,9 @@ export default class Create extends React.Component {
 
                 <button onClick={this.register}>Create</button>
 
-                <div>
+                {/* <div>
                     <button onClick={this.getProfile}>Get User Profile</button>
-                </div>
+                </div> */}
 
             </div>
 
@@ -68,14 +68,14 @@ export default class Create extends React.Component {
         })
     }
 
-    getProfile = async () => {
-        let response = await axios.get(`${base_url}api/user/profile`, {
-            headers: {
-                Authorization: `Bearer ${this.state.token}`
-            }
-        })
-        console.log(response.data)
-    }
+    // getProfile = async () => {
+    //     let response = await axios.get(`${base_url}api/user/profile`, {
+    //         headers: {
+    //             Authorization: `Bearer ${this.state.token}`
+    //         }
+    //     })
+    //     console.log(response.data)
+    // }
 
     register = async () => {
         await axios.post(`${base_url}api/user`, {
