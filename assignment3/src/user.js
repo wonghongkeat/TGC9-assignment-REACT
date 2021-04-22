@@ -1,7 +1,7 @@
 import React from "react"
 import axios from "axios"
 
-const base_url = "https://8080-c693cb85-d658-493b-9a4c-ec22f40a36b6.ws-us03.gitpod.io/"
+const base_url = "https://8080-rose-boar-u6d1djgq.ws-us03.gitpod.io/"
 
 export default class User extends React.Component {
     state = {
