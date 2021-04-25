@@ -10,7 +10,62 @@ export default class User extends React.Component {
         token: ""
 
 
+    };
+
+    updateFormField = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
     }
+
+    login = async () => {
+        let response = await axios.post(`${base_url}api/user/login`, {
+            username: this.state.username,
+            password: this.state.password
+        })
+        console.log(response.data);
+        this.setState({
+            token: response.data.token
+        });
+    }
+
+    getProfile = async () => {
+
+        let response = await axios.get(`${base_url}api/user/profile`, {
+            headers: {
+                Authorization: `Bearer ${this.state.token}`
+            }
+        })
+        console.log(response.data)
+
+    }
+
+    sendCart = async () => {
+        let cartContent = JSON.parse(this.state.cart);
+        let option = {
+            headers: {
+                Authorization: "Bearer " + this.state.token
+            }
+        };
+        console.log(option);
+        let response = await axios.put(`${base_url}api/cart`, {
+            cart_content: cartContent
+        },
+            option
+        );
+        console.log(response);
+    };
+    getCart = async () => {
+        let response = await axios.get(`${base_url}api/cart`, {
+            headers: {
+                Authorization: "Bearer " + this.state.token
+            }
+        });
+        this.setState({
+            cart: JSON.stringify(response.data),
+            actual_cart: response.data
+        });
+    };
 
     render() {
         return (
@@ -62,70 +117,18 @@ export default class User extends React.Component {
                 <button onClick={this.getCart}>Get Cart</button>
                 <button onClick={this.sendCart}>Send Cart</button>
                 <button onClick={() => {
-                        let escapedToken = encodeURIComponent(this.state.token);
-                        window.open(base_url + "loginWithToken?token=" + escapedToken);
-                    }}
+                    let escapedToken = encodeURIComponent(this.state.token);
+                    window.open(base_url + "loginWithToken?token=" + escapedToken);
+                }}
                 >
-                    Login With API Token
-        </button>
+Login With API Token
+                </button>
 
             </React.Fragment>
         )
     }
 
-    updateFormField = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    }
 
-    login = async () => {
-        let response = await axios.post(`${base_url}api/user/login`, {
-            username: this.state.username,
-            password: this.state.password
-        })
-        console.log(response.data);
-        this.setState({
-            token: response.data.token
-        });
-    }
-
-    getProfile = async () => {
-
-        let response = await axios.get(`${base_url}api/user/profile`, {
-            headers: {
-                Authorization: `Bearer ${this.state.token}`
-            }
-        })
-        console.log(response.data)
-       
-    }
-
-    sendCart = async () => {
-        let cartContent = JSON.parse(this.state.cart);
-        let option = {
-            headers: {
-                Authorization: "Bearer " + this.state.token
-            }
-        };
-        console.log(option);
-        let response = await axios.put(`${base_url}api/cart`,{ 
-            cart_content: cartContent },
-            option
-        );
-        console.log(response);
-    };
-    getCart = async () => {
-        let response = await axios.get( `${base_url}api/cart`, {
-            headers: {
-                Authorization: "Bearer " + this.state.token
-            }
-        });
-        this.setState({
-            cart: JSON.stringify(response.data),
-            actual_cart: response.data
-        });
-    };
 
 
 }
