@@ -7,11 +7,91 @@ export default class User extends React.Component {
     state = {
         username: "",
         password: "",
-        token: ""
-
+        token: "",
+        flavours: [],
+        toppings: [],
+        sugars: [],
+        product: {
+            flavour: "",
+            topping: "",
+            sugar: ""
+        },
+        cart: {},
+        cartProduct:{
+            productFlavour: "",
+            productSugar: "",
+            productTopping: ""
+        }
+       
+       
 
     };
 
+    async componentDidMount() {
+        let responseTopping = await axios.get(`${base_url}reactTopping`)
+        let responseFlavour = await axios.get(`${base_url}reactFlavours`)
+        let responseSugar = await axios.get(`${base_url}reactSugar`)
+        this.setState({
+            toppings: responseTopping.data,
+            flavours: responseFlavour.data,
+            sugars: responseSugar.data
+        })
+
+    }
+    //create Product
+    createProduct = () => {
+
+    }
+    create = () => {
+        let product = this.state.product
+        let copy = {...this.state.cart}
+        let modified = {...copy, product}
+        this.setState({
+            cart: modified,
+            product: {
+                ...this.state.product,
+                flavour: "",
+                sugar: "",
+                topping: []
+            }
+        })
+        console.log(JSON.stringify(this.state.product))
+    }
+
+    updateFlavourField = (e) => {
+        this.setState({
+            product: {
+                ...this.state.product,
+                flavour: e.target.value
+            }
+        });
+        console.log(this.state.product.flavour)
+    };
+
+    updateSugarField = (e) => {
+        this.setState({
+             product: {
+              ...this.state.product,
+           sugar: e.target.value
+          }
+            
+        });
+    };
+
+    updateToppingField = (e) => {
+        this.setState({
+             product: {
+              ...this.state.product,
+           topping: e.target.value
+          }
+            
+        });
+    };
+
+  
+
+
+    //user login
     updateFormField = (event) => {
         this.setState({
             [event.target.name]: event.target.value
@@ -41,7 +121,8 @@ export default class User extends React.Component {
     }
 
     sendCart = async () => {
-        let cartContent = JSON.parse(this.state.cart);
+        console.log(this.state.cart)
+        let cartContent = JSON.stringify(this.state.cart);
         let option = {
             headers: {
                 Authorization: "Bearer " + this.state.token
@@ -68,8 +149,61 @@ export default class User extends React.Component {
     };
 
     render() {
+     
         return (
             <React.Fragment>
+
+                <div>
+                    <div>
+                        <h3>flavour</h3>
+                        {this.state.flavours.map(f => (
+                            <React.Fragment>
+                                <input
+                                    type="radio"
+                                    value={f.tea}
+                                    name="flavour"
+                                    checked={this.state.product.flavour == f.tea}
+                                    onChange={this.updateFlavourField}
+                                />
+                                <label>{f.tea}</label>
+                            </React.Fragment>
+                        ))}
+                    </div>
+                    <div>
+                        <h3>sugar level</h3>
+                        {this.state.sugars.map(s => (
+                            <React.Fragment>
+                                <input
+                                    type="radio"
+                                    value={s.level}
+                                    name="sugar"
+                                    checked={this.state.product.sugar == s.level}
+                                    onChange={this.updateSugarField}
+                                />
+                                <label>{s.level}</label>
+                            </React.Fragment>
+                        ))}
+                    </div>
+                    <div>
+                        <h3>topping</h3>
+                        {this.state.toppings.map(t => (
+                            <React.Fragment>
+                                <input
+                                    type="checkbox"
+                                    value={t.topping}
+                                    name="topping"
+                                    checked={this.state.product.topping.includes(t.topping.toString())}
+                                    onChange={this.updateToppingField}
+                                />
+                                <label>{t.topping}</label>
+                            </React.Fragment>
+                        ))}
+                    </div>
+                    <button onClick={this.create}>add to cart</button>
+                </div>
+
+                {/* ++++++++++++++++++++++++++user login+++++++++++++++++++++++++++++++++++++++++++++++++++++++*/}  
+
                 <div>
                     <input
                         type="text"
@@ -102,7 +236,7 @@ export default class User extends React.Component {
                 <div>
                     <textarea
                         onChange={this.updateFormField}
-                        value={this.state.cart}
+                        value={JSON.stringify(this.state.product)}
                         placeholder="cart_data"
                         name="cart"
                     />
@@ -118,10 +252,10 @@ export default class User extends React.Component {
                 <button onClick={this.sendCart}>Send Cart</button>
                 <button onClick={() => {
                     let escapedToken = encodeURIComponent(this.state.token);
-                    window.open(base_url + "loginWithToken?token=" + escapedToken);
+                    window.open(base_url + "/api/loginWithToken?token=" + escapedToken);
                 }}
                 >
-Login With API Token
+                    Login With API Token
                 </button>
 
             </React.Fragment>

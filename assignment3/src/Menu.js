@@ -8,9 +8,8 @@ export default class Topping extends React.Component {
         toppings: [],
         flavours: [],
         sugars: []
-
-
     }
+
 
     async componentDidMount() {
         let responseTopping = await axios.get(`${base_url}reactTopping`)
@@ -25,26 +24,29 @@ export default class Topping extends React.Component {
 
 
     render() {
+        const myStyle={
+            textAlign: "center" 
+        }
         return (
             <React.Fragment>
 
-                <h1>toppings available:</h1>
+                <h1 style={myStyle}>toppings available:</h1>
                 {this.state.toppings.map(t => (
-                    <div>
+                    <div style={myStyle}>
                         <p>{t.topping} - ${t.price / 100}</p>
                     </div>
                 ))}
 
-                <h1>flavours available</h1>
+                <h1 style={myStyle}>flavours available</h1>
                 {this.state.flavours.map(f => (
-                    <div>
+                    <div style={myStyle}>
                         <p>{f.tea} - ${f.price / 100}</p>
                     </div>
                 ))}
 
-                <h1>Sugar level</h1>
+                <h1 style={myStyle}>Sugar level</h1>
                 {this.state.sugars.map(s => (
-                    <div>
+                    <div style={myStyle}>
                         <p>{s.level}%</p>
                     </div>
                 ))}

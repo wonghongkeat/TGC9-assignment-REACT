@@ -15,8 +15,16 @@ export default class Create extends React.Component {
 
 
     render() {
+
+        const myStyle={
+            textAlign: "center",
+            marginTop:"50px"
+        }
+
         return (
-            <div>
+            <React.Fragment>
+                <h1 style={myStyle}>Please create a user profile</h1>
+            <div style={myStyle}>
                 <input
                     type="text"
                     value={this.state.username}
@@ -24,7 +32,8 @@ export default class Create extends React.Component {
                     placeholder="username"
                     onChange={this.updateFormField}
                 />
-
+                </div>
+                <div style={myStyle}>
                 <input
                     type="text"
                     value={this.state.email}
@@ -32,7 +41,8 @@ export default class Create extends React.Component {
                     placeholder="email"
                     onChange={this.updateFormField}
                 />
-
+                </div>
+                <div style={myStyle}>
                 <input
                     type="text"
                     value={this.state.address}
@@ -40,7 +50,9 @@ export default class Create extends React.Component {
                     placeholder="address"
                     onChange={this.updateFormField}
                 />
+                </div>
 
+                <div style={myStyle}>
                 <input
                     type="text"
                     value={this.state.password}
@@ -48,14 +60,12 @@ export default class Create extends React.Component {
                     placeholder="password"
                     onChange={this.updateFormField}
                 />
-
+                </div>
+                <div style={myStyle}>
                 <button onClick={this.register}>Create</button>
-
-                {/* <div>
-                    <button onClick={this.getProfile}>Get User Profile</button>
-                </div> */}
-
-            </div>
+                </div>
+                </React.Fragment>
+            
 
 
         )
@@ -68,14 +78,6 @@ export default class Create extends React.Component {
         })
     }
 
-    // getProfile = async () => {
-    //     let response = await axios.get(`${base_url}api/user/profile`, {
-    //         headers: {
-    //             Authorization: `Bearer ${this.state.token}`
-    //         }
-    //     })
-    //     console.log(response.data)
-    // }
 
     register = async () => {
         await axios.post(`${base_url}api/user`, {

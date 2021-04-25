@@ -7,11 +7,13 @@ import AddToCart from "./addToCart"
 import User from "./user"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './frontPage.css'
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 
 function App() {
     return (
         <Router>
+
             <nav className="navbar navbar-expand-lg">
                 <a className="navbar-brand" href="#">Suck eat</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,9 +31,10 @@ function App() {
                         <li className="nav-item">
                             <Link to="/login">createUser</Link>
                         </li>
-                           <li className="nav-item">
+
+                        {/*<li className="nav-item">
                             <Link to="/createProduct">createProduct</Link>
-                        </li>
+                        </li>*/} 
                       
                            <li className="nav-item">
                             <Link to="/user">User Login</Link>

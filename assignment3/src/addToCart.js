@@ -17,7 +17,6 @@ export default class AddToCart extends React.Component {
     }
 
 
-
     async componentDidMount() {
         let responseTopping = await axios.get(`${base_url}reactTopping`)
         let responseFlavour = await axios.get(`${base_url}reactFlavours`)
@@ -27,9 +26,71 @@ export default class AddToCart extends React.Component {
             flavours: responseFlavour.data,
             sugars: responseSugar.data
         })
+    
+    }
+
+    create = () => {
+        let copy = [...this.state.cart]
+        let modified = [...copy, this.state.product]
+        this.setState({
+            cart: modified,
+             product: {
+                ...this.state.product,
+                flavour: "",
+                sugar: "",
+                topping:[]
+            }
+        })
+    }
+
+    updateFlavourField = (e) => {
+        this.setState({
+            product: {
+                ...this.state.product,
+                flavour: e.target.value
+            }
+        });
+        console.log(this.state.product.flavour)
+    };
+
+    updateSugarField = (e) => {
+        this.setState({
+            product: {
+                ...this.state.product,
+                sugar: e.target.value
+            }
+        });
+    };
+
+    updateToppingField = (e) => {
+        let originalTopping = this.state.product[e.target.name];
+        if (!originalTopping.includes(e.target.value)) {
+            let modified = [...originalTopping, e.target.value];
+            this.setState({
+                product: {
+                    ...this.state.product,
+                    [e.target.name]: modified
+                }
+            })
+        } else {
+            let modified = originalTopping.filter((eachItem) => {
+                return eachItem !== e.target.value;
+            })
+            this.setState({
+                product: {
+                    ...this.state.product,
+                    [e.target.name]: modified
+                }
+            })
+        }
     }
 
     render() {
+
+        const myStyle={
+            textAlign: "center",
+            marginTop:"50px"
+        }
         return (
             <div>
                 <div>
@@ -82,58 +143,5 @@ export default class AddToCart extends React.Component {
         )
     }
 
-    create = () => {
-        let copy = [...this.state.cart]
-        let modified = [...copy, this.state.product]
-        this.setState({
-            cart: modified,
-             product: {
-                ...this.state.product,
-                flavour: "",
-                sugar: "",
-                topping:[]
-            }
-        })
-    }
-
-    updateFlavourField = (e) => {
-        this.setState({
-            product: {
-                ...this.state.product,
-                flavour: e.target.value
-            }
-        });
-    };
-
-    updateSugarField = (e) => {
-        this.setState({
-            product: {
-                ...this.state.product,
-                sugar: e.target.value
-            }
-        });
-    };
-
-    updateToppingField = (e) => {
-        let originalTopping = this.state.product[e.target.name];
-        if (!originalTopping.includes(e.target.value)) {
-            let modified = [...originalTopping, e.target.value];
-            this.setState({
-                product: {
-                    ...this.state.product,
-                    [e.target.name]: modified
-                }
-            })
-        } else {
-            let modified = originalTopping.filter((eachItem) => {
-                return eachItem !== e.target.value;
-            })
-            this.setState({
-                product: {
-                    ...this.state.product,
-                    [e.target.name]: modified
-                }
-            })
-        }
-    }
+  
 }
